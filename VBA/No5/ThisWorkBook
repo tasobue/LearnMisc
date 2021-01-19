@@ -1,1 +1,13 @@
-aaa
+Option Explicit
+'===================================================================================================
+Private Const g_cnsModuleName As String = "(ThisWorkbook)"
+
+Private Sub Workbook_Open()
+    '-----------------------------------------------------------------------------------------------
+    Debug.Print "Workbook_Openイベントが発生しました。" & g_cnsModuleName
+    Worksheets("Sheet2").Activate
+    Worksheets("Sheet1").Activate
+    'Worksheets("Sheet1").Select ' 「Sheet1」のシートを選択
+End Sub
+
+
