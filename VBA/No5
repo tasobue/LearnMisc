@@ -3,7 +3,7 @@ Private Sub output()
     Dim FileNumber
     Dim InputData
     Dim FilePath
-    'エクスプローラからファイルを指定
+    'エクスプローラからファイルを指定aaaa
     Dim path, FileName
     '配列宣言
     Dim log As Variant
