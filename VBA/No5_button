@@ -16,23 +16,8 @@ Sub daybefore_Click()
     'テキストの値を取得したい
     a = Worksheets("Sheet1").TextBox1.Value
     
-    'テキストのnowdateを使って処理したい
-   
-    
     '1日前の日付を取得したい
-    'Me.TextBox1.Value = DateAdd("d", -1, Date)
-    
-    
-    'nowdateを使って前日を取得
-    '作成したパスを引数として渡してあげる
-    ' 昨日の日付を取得
-    'a = Date - 1
-    'Debug.Print (a)
-    
-    a = DateAdd(a, -1, Date)
-    Debug.Print (a)
-    
-    TextBox1.Value = a
+    Me.TextBox1.Value = DateAdd("d", -1, a)
     
     'output()を呼び出して出力する
     'call output（引数）
