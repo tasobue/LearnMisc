@@ -1,4 +1,4 @@
-Private Sub output()
+Public Sub output(targetDate As String)
     Dim i As Long
     Dim FileNumber
     Dim InputData
@@ -9,29 +9,21 @@ Private Sub output()
     Dim fso As FileSystemObject
     Dim s As String
     Dim d As Long
-  
-'---------------------------------------------------
+    Const csvFolder As String = "C:\work\kintai\"
     
-    '任意フォルダを設定するダイアログを表示します
-    With Application.FileDialog(msoFileDialogFilePicker)
+    Columns("A").Clear
     
-    'カレントディレクトリを指定します
-    .InitialFileName = ThisWorkbook.path
+    'ファイルパスを作る
+    FilePath = csvFolder & targetDate & "_kintai.csv"
     
-    '設定しなかったら終了します
-    If .Show = False Then Exit Sub
-       
-    '設定したフォルダを表示します
-    path = .SelectedItems(1)
     
-    End With
-    
-    'ファイル名を取得します
-    FileName = Dir(path & "*.csv")
-    
-    'ファイルのフルパスを設定します
-    FilePath = path & FileName
-
+    'ファイルの存在確認
+    If Dir(FilePath) = "" Then
+   
+        MsgBox FilePath & vbCrLf & _
+               "が存在しません"
+        Exit Sub
+    End If
 
 '----------------------------------------------------
     ' インスタンス化
@@ -94,7 +86,6 @@ Private Sub output()
         Close #2
 
 End Sub
-
 
 
 
