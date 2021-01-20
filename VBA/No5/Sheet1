@@ -22,15 +22,19 @@ Private Sub TextBox1_LostFocus()
     
 End Sub
 
+'初期表示
 Private Sub Worksheet_Activate()
     Debug.Print "Worksheet_Activateイベントが発生しました。" & g_cnsModuleName
     
       Dim nowdate As Date
-    nowdate = Data
+      'DateDiff関数を使って開始から終了までを指定
+      '第3引数を取得した日から+4ににしたい
+    nowdate = DateDiff("yyyymmdd", Date, 4)
     
-    TextBox1.Value = Format(Date, "yyyy年mm月dd日")
+    TextBox1.Value = Format(Date, "yyyymmdd")
     
 End Sub
+
 
 '前日ボタン
 Sub daybefore_Click()
@@ -49,6 +53,9 @@ Sub daybefore_Click()
     'テキストの値を取得したい
     targetDate = Worksheets("Sheet1").TextBox1.Value
     
+    
+    '書き方調べ中
+    'DateDiff("yyyymmdd", targetDate, targetDate+4)
     
     
     '1日前の日付を取得したい
