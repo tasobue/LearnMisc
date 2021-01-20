@@ -39,16 +39,15 @@ Private Sub TextBox1_LostFocus()
     
     i = 0
     
-    For i = i To preparation
+    For i = 0 To preparation
     '差分を取得して配列に入れる
           
     'strDate(preparation)？？格納できない
-    strDate(i) = DateAdd("d", 1, targetDate)
-    i = i + 1
+    strDate(i) = DateAdd("d", i, targetDate)
     Next
     
     'output()を呼び出して出力する
-    'Call output(strDate)
+    Call output(strDate(preparation), preparation)
     
 End Sub
 
