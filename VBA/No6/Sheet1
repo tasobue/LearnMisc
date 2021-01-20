@@ -3,11 +3,12 @@ Private Sub TextBox1_LostFocus()
 
     Dim targetDate As Date
     Dim targetDate2 As Date
-   ' Dim strDate As String
     Dim newday As Date
     Dim nowdate2 As Date
-    Dim strDate() As Variant
+    
     Dim preparation As Date
+    Dim i As Long
+    Dim strDate() As Variant
     
     
     '変換できる値かを調べる
@@ -25,22 +26,24 @@ Private Sub TextBox1_LostFocus()
     
     End If
     
+    '1.テキスト１の値を取得
     targetDate = Worksheets("Sheet1").TextBox1.Value
-    
- '   targetDate2 = Worksheets("Sheet1").TextBox2.Value
+    '1.テキスト2の値を取得
+    targetDate2 = Worksheets("Sheet1").TextBox2.Value
   
-    'テキスト1の日付取得
-    newday = Format(targetDate, "yyyy/mm/dd")
     
-    'テキスト１から＋4日分を取得
-    nowdate2 = DateAdd("d", 4, newday)
+    'テキストの差分をとる
+    '"d"だと自分取得したい値が取れない
+    preparation = DateDiff("d", targetDate, targetDate2)
     
-    '開始と終了を上記変数を指定して、差分をとり配列に格納
-    '宣言の型が合っていないせいかエラーが表示される
-    '差分をとってくれるのでdate型だと思う
-    preparation = DateDiff("ｄ", newday, nowdate2)
-    '区切りが必要なのでsplitを使う
-     strDate = Split(preparation, vbCrLf)
+    i = 1
+    
+    For i = i To preparation
+    '差分を取得して配列に入れる
+        strDate(i) = DateDiff("yyyymmdd", targetDate, targetDate2)
+        i = i + 1
+        
+    Next
     
     
     'output()を呼び出して出力する
