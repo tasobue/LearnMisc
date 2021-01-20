@@ -1,4 +1,4 @@
-Public Sub output(targetDate As String)
+Public Sub output(targetDate As strDate)
     Dim i As Long
     Dim FileNumber
     Dim InputData
