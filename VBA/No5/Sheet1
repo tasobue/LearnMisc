@@ -1,3 +1,27 @@
+
+Private Sub TextBox1_LostFocus()
+
+    Dim targetDate As Date
+    Dim strDate As String
+    
+    '変換できる値かを調べる
+    If IsDate(Worksheets("Sheet1").TextBox1.Value) = False Then
+      
+      MsgBox "有効な日付を入力してください"
+      Exit Sub
+    
+    End If
+    
+    targetDate = Worksheets("Sheet1").TextBox1.Value
+    
+    '// 年月日（スラッシュ区切り）
+    strDate = Format(targetDate, "yyyymmdd")
+    
+    'output()を呼び出して出力する
+    Call output(strDate)
+    
+End Sub
+
 Private Sub Worksheet_Activate()
     Debug.Print "Worksheet_Activateイベントが発生しました。" & g_cnsModuleName
     
@@ -11,25 +35,64 @@ End Sub
 '前日ボタン
 Sub daybefore_Click()
 
-    Dim a As Date
+    Dim targetDate As Date
+    Dim previousDate As Date
+    Dim strDate As String
+    
+    If IsDate(Worksheets("Sheet1").TextBox1.Value) = False Then
+      
+      MsgBox "有効な日付を入力してください"
+      Exit Sub
+    
+    End If
     
     'テキストの値を取得したい
-    a = Worksheets("Sheet1").TextBox1.Value
+    targetDate = Worksheets("Sheet1").TextBox1.Value
+    
+    
     
     '1日前の日付を取得したい
-    Me.TextBox1.Value = DateAdd("d", -1, a)
+    previousDate = DateAdd("d", -1, targetDate)
+    
+    Me.TextBox1.Value = previousDate
+    
+    '// 年月日（スラッシュ区切り）
+    strDate = Format(previousDate, "yyyymmdd")
+    
     
     'output()を呼び出して出力する
-    'call output（引数）
+    Call output(strDate)
    
 End Sub
 
-
-
 Sub nextday_Click()
 
-     Me.TextBox1.Value = DateAdd("d", -1, Date)
+Dim targetDate As Date
+Dim previousDate As Date
+Dim strDate As String
+    
+    If IsDate(Worksheets("Sheet1").TextBox1.Value) = False Then
+      
+      MsgBox "有効な日付を入力してください"
+      Exit Sub
+    
+    End If
+    
+    'テキストの値を取得したい
+    targetDate = Worksheets("Sheet1").TextBox1.Value
+    
+    
+    '1日前の日付を取得したい
+    previousDate = DateAdd("d", 1, targetDate)
+    
+    Me.TextBox1.Value = previousDate
+    
+    '// 年月日（スラッシュ区切り）
+    strDate = Format(previousDate, "yyyymmdd")
+    
+    
+    'output()を呼び出して出力する
+    Call output(strDate)
      
 End Sub
-
 
