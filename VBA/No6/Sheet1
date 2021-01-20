@@ -3,11 +3,10 @@ Private Sub TextBox1_LostFocus()
 
     Dim targetDate As Date
     Dim targetDate2 As Date
-    Dim newday As Date
-    Dim nowdate2 As Date
     
-    Dim preparation As Date
+    Dim preparation As Integer
     Dim i As Long
+    Dim newday As Date
     Dim strDate() As Variant
     
     
@@ -33,18 +32,20 @@ Private Sub TextBox1_LostFocus()
   
     
     'テキストの差分をとる
-    '"d"だと自分取得したい値が取れない
     preparation = DateDiff("d", targetDate, targetDate2)
     
-    i = 1
+    '配列を再定義
+    ReDim strDate(preparation)
+    
+    i = 0
     
     For i = i To preparation
     '差分を取得して配列に入れる
-        strDate(i) = DateDiff("yyyymmdd", targetDate, targetDate2)
-        i = i + 1
-        
+          
+    'strDate(preparation)？？格納できない
+    strDate(i) = DateAdd("d", 1, targetDate)
+    i = i + 1
     Next
-    
     
     'output()を呼び出して出力する
     'Call output(strDate)
