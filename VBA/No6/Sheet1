@@ -19,14 +19,15 @@ Private Sub CommandButton1_Click()
     '1.テキスト１の値を取得
     targetDate = Worksheets("Sheet1").TextBox1.Value
     
-    'フォーマットを"2021/01"にしたいのに"2021/01/01になる"
-    targetDate = format(targetDate, "yyyy/mm")
+    '今月の月末日
+    targetDate2 = DateSerial(Year(Date), _
+    Month(Date) + 1, 0)
     
     '１ヵ月分取得したいから、”2021/01”が付くものをすべて取得できる？
-     targetDate2 = DateAdd("m", 1, targetDate)
+     'targetDate2 = DateAdd("d", 1, targetDate)
      
     'テキストの差分をとる
-    preparation = DateDiff("m", targetDate, targetDate2)
+    preparation = DateDiff("d", targetDate, targetDate2)
     
     '配列を再定義
     ReDim strDate(preparation)
