@@ -1,9 +1,6 @@
-
-Private Sub TextBox1_LostFocus()
-
+Private Sub CommandButton1_Click()
     Dim targetDate As Date
     Dim targetDate2 As Date
-    
     Dim preparation As Integer
     Dim i As Long
     Dim newday As Date
@@ -17,22 +14,19 @@ Private Sub TextBox1_LostFocus()
       Exit Sub
     
     End If
-    
-    If IsDate(Worksheets("Sheet1").TextBox2.Value) = False Then
-      
-      MsgBox "有効な日付を入力してください"
-      Exit Sub
-    
-    End If
+
     
     '1.テキスト１の値を取得
     targetDate = Worksheets("Sheet1").TextBox1.Value
-    '1.テキスト2の値を取得
-    targetDate2 = Worksheets("Sheet1").TextBox2.Value
-  
     
+    'フォーマットを"2021/01"にしたいのに"2021/01/01になる"
+    targetDate = format(targetDate, "yyyy/mm")
+    
+    '１ヵ月分取得したいから、”2021/01”が付くものをすべて取得できる？
+     targetDate2 = DateAdd("m", 1, targetDate)
+     
     'テキストの差分をとる
-    preparation = DateDiff("d", targetDate, targetDate2)
+    preparation = DateDiff("m", targetDate, targetDate2)
     
     '配列を再定義
     ReDim strDate(preparation)
@@ -40,128 +34,17 @@ Private Sub TextBox1_LostFocus()
     i = 0
     
     For i = 0 To preparation
-    '差分を取得して配列に入れる
-          
-    'strDate(preparation)？？格納できない
-    strDate(i) = DateAdd("d", i, targetDate)
-    Next
     
-    'output()を呼び出して出力する
-    Call output(strDate(preparation), preparation)
-    
-End Sub
-
-
-Private Sub Worksheet_Activate()
-    Debug.Print "Worksheet_Activateイベントが発生しました。" & g_cnsModuleName
-    
-    Dim nowdate As Date
-    
-    
-    nowdate = Data
   
     
-    TextBox1.Value = Format(Date, "yyyymmdd")
-    TextBox2.Value = DateAdd("yyyymmdd", 4, Date)
-    
-End Sub
-
-'前日ボタン
-Sub daybefore_Click()
-
-    Dim targetDate As Date
-    Dim previousDate As Date
-    Dim strDate As String
-    
-    Dim targetDate2 As Date
-    Dim previousDate2 As Date
-    Dim temporary As Date
-    Dim temporary2 As Date
+    strDate(i) = DateAdd("d", i, targetDate)
     
     
-    If IsDate(Worksheets("Sheet1").TextBox1.Value) = False Then
+    Next
+    
       
-      MsgBox "有効な日付を入力してください"
-      Exit Sub
-    
-    End If
-    'ボタンを押すとテキスト2も自動で-4日後の日付を出力したい　Dateadd関数
-    'テキストの値を取得したい
-    targetDate = Worksheets("Sheet1").TextBox1.Value
-    '前日・翌日ボタン同様の場所でエラーがでる「型が一致しない」
-    '初期表示の場所に問題があるのか
-    targetDate2 = Worksheets("Sheet1").TextBox2.Value
-    
-    
-    '1日前の日付を取得したい
-    previousDate = DateAdd("d", -1, targetDate)
-    
-    Me.TextBox1.Value = previousDate
- 
-    temporary = Format(previousDate, "yyyymmdd")
-    
-    
-    '4日前の日付を取得したい
-    previousDate2 = DateAdd("d", -4, targetDate2)
-    
-    Me.TextBox2.Value = previousDate2
- 
-    temporary2 = Format(previousDate2, "yyyymmdd")
-    
-    
-    '開始と終了を上記変数を指定して、引数として渡す
-    strDate = DateDiff("yyyymmdd", temporary, temporary2)
     
     'output()を呼び出して出力する
     Call output(strDate)
-   
+    'Call test(strDate())
 End Sub
-
-Sub nextday_Click()
-
-    Dim targetDate As Date
-    Dim previousDate As Date
-    Dim strDate As String
-    
-    Dim targetDate2 As Date
-    Dim previousDate2 As Date
-    Dim temporary As Date
-    Dim temporary2 As Date
-    
-    If IsDate(Worksheets("Sheet1").TextBox1.Value) = False Then
-      
-      MsgBox "有効な日付を入力してください"
-      Exit Sub
-    
-    End If
-    
-    'テキストの値を取得したい
-    'ボタンを押すとテキスト2も自動で+4日後の日付を出力したい　Dateadd関数
-    targetDate = Worksheets("Sheet1").TextBox1.Value
-    
-        
-    '1日前の日付を取得したい
-    previousDate = DateAdd("d", 1, targetDate)
-    
-    Me.TextBox1.Value = previousDate
- 
-    temporary = Format(previousDate, "yyyymmdd")
-    
-    
-    '4日前の日付を取得したい
-    previousDate2 = DateAdd("d", 4, targetDate2)
-    
-    Me.TextBox2.Value = previousDate2
- 
-    temporary2 = Format(previousDate2, "yyyymmdd")
-    
-    
-    '開始と終了を上記変数を指定して、引数として渡す
-    strDate = DateDiff("yyyymmdd", temporary, temporary2)
-    
-    
-    'output()を呼び出して出力する
-    Call output(strDate)
-     
-End Sub
-
