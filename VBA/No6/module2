@@ -9,7 +9,7 @@ Public Sub output(targetDate() As Variant)
     Dim fso As FileSystemObject
     Dim s As String
     Dim d As Long
-    Dim fo() As Variant
+    Dim fo As String
     Const csvFolder As String = "C:\work\kintai\"
     
     Columns("A").Clear
@@ -23,22 +23,24 @@ Public Sub output(targetDate() As Variant)
 
         '文字列へ変換
         'foも配列にしないといけない
-        'fo() = CStr(targetDate)
+        fo = CStr(targetDate(i))
         
-        
+        fo = format(fo, "yyyymmdd")
+     
         '定数を定義してくださいと表示がでる
         'ファイルパスを作る
-        FilePath = csvFolder & targetDate(i) & "_kintai.csv"
+        FilePath = csvFolder & fo & "_kintai.csv"
         
         
         'ファイルの存在確認
         If Dir(FilePath) = "" Then
        
-            MsgBox FilePath & vbCrLf & _
-                   "が存在しません"
-            Exit Sub
+           ' MsgBox FilePath & vbCrLf & _
+            '       "が存在しません"
+          Exit Sub
         End If
-    
+        
+            
     '----------------------------------------------------
         ' インスタンス化
         Set fso = New FileSystemObject
@@ -62,7 +64,7 @@ Public Sub output(targetDate() As Variant)
         
      '---------------------------------------------------------------
     
-        d = 1
+        d = Cells(Rows.Count, 1).End(xlUp).Row + 2
         
         For Each log In list
                  
@@ -71,7 +73,7 @@ Public Sub output(targetDate() As Variant)
             
             If InStr(log, "LogOn") > 0 Then
             
-                Cells(d, "A").Interior.Color = RGB(255, 0, 0)
+                Cells(d, "D").Interior.Color = RGB(255, 0, 0)
             
             ElseIf InStr(log, "ScreenLock") > 0 Then
             
@@ -90,6 +92,7 @@ Public Sub output(targetDate() As Variant)
             End If
             
             d = d + 1
+            
                     
                     
             Set wb = Nothing
@@ -99,9 +102,10 @@ Public Sub output(targetDate() As Variant)
             
             Close #2
             
-            Next
+        Next
 
-    Next
+  
+
 End Sub
 
 
