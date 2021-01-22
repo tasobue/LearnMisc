@@ -2,7 +2,7 @@ Function getData(FilePath As String)
     
     Dim ts As TextStream
     Dim fso As FileSystemObject
-    Dim s As String
+    Dim s
     
         
         ' インスタンス化
@@ -14,7 +14,7 @@ Function getData(FilePath As String)
         s = ts.ReadAll
         
         ' 1 行ずつの配列に変換
-        s = Split(s, vbCrLf)
+       list = Split(s, vbCrLf)
         
         ' ファイルを閉じる
         ts.Close
@@ -25,6 +25,6 @@ Function getData(FilePath As String)
     
     Close #1
     
-    getData = s
+    getData = list
     
 End Function
