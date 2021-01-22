@@ -1,4 +1,4 @@
-Function getData(FilePath As String) As String
+Function getData(FilePath As String) As Variant
     
     Dim ts As TextStream
     Dim fso As FileSystemObject
