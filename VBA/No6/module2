@@ -2,7 +2,8 @@ Function getData(FilePath As String)
     
     Dim ts As TextStream
     Dim fso As FileSystemObject
-    Dim s
+    Dim s As String
+    'Dim list As Object
     
         
         ' インスタンス化
@@ -27,4 +28,5 @@ Function getData(FilePath As String)
     
     getData = list
     
+  
 End Function
