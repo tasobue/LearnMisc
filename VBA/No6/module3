@@ -1,0 +1,47 @@
+Function insertData()
+
+    Dim log As Variant
+    Dim d As Long
+    
+    
+        d = Cells(Rows.Count, 1).End(xlUp).Row + 2
+        
+        For Each log In list
+        
+            Cells(d, "A") = log
+            
+            
+            If InStr(log, "LogOn") > 0 Then
+            
+            
+                Cells(d, "D").Interior.Color = RGB(255, 0, 0)
+                
+                ElseIf InStr(log, "ScreenLock") > 0 Then
+                
+                Cells(d, "A").Interior.Color = RGB(0, 0, 255)
+                
+                ElseIf InStr(log, "ScreenUnlock") > 0 Then
+                
+                Cells(d, "A").Interior.Color = RGB(0, 255, 0)
+                
+                
+            ElseIf InStr(log, "LogOff") > 0 Then
+            
+                
+                Cells(d, "A").Interior.Color = RGB(255, 255, 0)
+                
+                
+            Else
+            
+            End If
+            
+            d = d + 1
+            
+            Set wb = Nothing
+            Set ws = Nothing
+                
+        Next log
+
+    Close #2
+    
+End Function
