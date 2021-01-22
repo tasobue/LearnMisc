@@ -1,47 +1,55 @@
-Function insertData(log As Variant)
+Public Sub output(targetDate() As Variant)
+    Dim i As Long
+    Dim FilePath As String
+    Dim fo As String
+    Dim list As Variant
+    Dim side As Long
+    Dim vertical As Variant
+    Const csvFolder As String = "C:\work\kintai\"
     
-    Dim d As Long
     
+    Columns("A").Clear
+    
+    
+    i = 0
+    
+    For i = 0 To UBound(targetDate)
         
-        d = Cells(Rows.Count, 1).End(xlUp).Row + 2
+        '文字列へ変換
+        fo = CStr(targetDate(i))
         
+        fo = format(fo, "yyyymmdd")
+        
+        'ファイルパスを作る
+        FilePath = csvFolder & fo & "_kintai.csv"
+        
+        'True:関数を呼び出す　False:セルを空白にする
+        If Dir(FilePath) = "" Then
+            
+            '1番したの行を取得してセルを空にする
+            side = Cells(Rows.Count, 1).End(xlUp).Row + 1
+            vertical = Columns("D:H")
+            'vertical = Range("A", "B", "C")
+            
+            Cells(side, vertical).Interior.Color = "a"
+            
+        Else
+        
+            '戻り値を受け取る
+            list = getData(FilePath)
+            
+            Call insertData(list)
+            
+        
+        End If
+    
+    Next
+  
+End Sub
 
-        For Each lists In log
-        
-            Cells(d, "A") = lists
-            
-            
-            If InStr(lists, "LogOn") > 0 Then
-            
-            
-                Cells(d, "D").Interior.Color = RGB(255, 0, 0)
-                
-                ElseIf InStr(lists, "ScreenLock") > 0 Then
-                
-                Cells(d, "A").Interior.Color = RGB(0, 0, 255)
-                
-                ElseIf InStr(lists, "ScreenUnlock") > 0 Then
-                
-                Cells(d, "A").Interior.Color = RGB(0, 255, 0)
-                
-                
-            ElseIf InStr(lists, "LogOff") > 0 Then
-            
-                
-                Cells(d, "A").Interior.Color = RGB(255, 255, 0)
-                
-                
-            Else
-            
-            End If
-            
-            d = d + 1
-            
-            Set wb = Nothing
-            Set ws = Nothing
-                
-        Next lists
 
-    Close #2
-    
-End Function
+
+
+
+
+
