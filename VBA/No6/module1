@@ -28,10 +28,10 @@ Public Sub output(targetDate() As Variant)
             Else
             
               '戻り値を受け取る
-              list = getData(FilePath)
+              Let list = getData(FilePath)
                 
-              'Call insertData(list)
-              Call insertData(s.list)
+              Call insertData(list)
+              Call insertData(list)
 
         End If
                   
