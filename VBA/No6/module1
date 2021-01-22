@@ -1,0 +1,47 @@
+Public Sub output(targetDate() As Variant)
+    Dim i As Long
+    Dim FileNumber
+    Dim FilePath
+    Dim fo As String
+    Const csvFolder As String = "C:\work\kintai\"
+    
+    
+    Columns("A").Clear
+    
+  
+    i = 0
+    
+    For i = 0 To UBound(targetDate)
+
+        '文字列へ変換
+        fo = CStr(targetDate(i))
+        
+        fo = format(fo, "yyyymmdd")
+     
+        'ファイルパスを作る
+        FilePath = csvFolder & fo & "_kintai.csv"
+        
+        'True:関数を呼び出す　False:セルを空白にする
+        If Dir(FilePath) = "" Then
+         
+                'セルを空にする
+            
+            Else
+            
+              '戻り値を受け取る
+              s = getData(FilePath)
+                
+                Call dataInsert
+
+        End If
+                  
+     Next
+  
+End Sub
+
+
+
+
+
+
+
