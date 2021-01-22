@@ -3,7 +3,6 @@ Function getData(FilePath As String)
     Dim ts As TextStream
     Dim fso As FileSystemObject
     Dim s As String
-    'Dim list As Object
     
         
         ' インスタンス化
