@@ -1,4 +1,4 @@
-Function insertData()
+Function insertData(log As String)
 
     Dim log As Variant
     Dim d As Long
