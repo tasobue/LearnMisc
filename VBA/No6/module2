@@ -1,0 +1,30 @@
+Function getData(FilePath As String)
+    
+    Dim ts As TextStream
+    Dim fso As FileSystemObject
+    Dim s As String
+    
+        
+        ' インスタンス化
+        Set fso = New FileSystemObject
+        
+        'ファイルデータを一括取得
+        Set ts = fso.OpenTextFile(FilePath, format:=TristateFalse)
+        
+        s = ts.ReadAll
+        
+        ' 1 行ずつの配列に変換
+        s = Split(s, vbCrLf)
+        
+        ' ファイルを閉じる
+        ts.Close
+        
+        ' 後始末
+        Set ts = Nothing
+        Set fso = Nothing
+    
+    Close #1
+    
+    getData = s
+    
+End Function
