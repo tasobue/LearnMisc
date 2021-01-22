@@ -1,7 +1,6 @@
 Public Sub output(targetDate() As Variant)
     Dim i As Long
-    Dim FileNumber
-    Dim FilePath
+    Dim FilePath As String
     Dim fo As String
     Const csvFolder As String = "C:\work\kintai\"
     
@@ -29,9 +28,9 @@ Public Sub output(targetDate() As Variant)
             Else
             
               '戻り値を受け取る
-              s = getData(FilePath)
+              list = getData(FilePath)
                 
-                Call dataInsert
+              Call insertData(list)
 
         End If
                   
