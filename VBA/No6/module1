@@ -3,40 +3,53 @@ Public Sub output(targetDate() As Variant)
     Dim FilePath As String
     Dim fo As String
     Dim list As Variant
+    Dim side As Long
+    Dim vertical As Variant
+    Dim a As Integer '7行目以降のセル位置を取得
     Const csvFolder As String = "C:\work\kintai\"
     
-    
-    Columns("A").Clear
-    
-  
     i = 0
     
-    For i = 0 To UBound(targetDate)
+    '7行目以降を初期化したい
+    '最終行を取得
+    'MaxRow = Range("E").End(xlDown).Row
+Worksheets("Sheet1").Range("E7:E37").ClearContents
+Worksheets("Sheet1").Range("G7:G37").ClearContents
 
+    For i = 0 To UBound(targetDate)
+    
+        a = 7 + i
+       
+        
         '文字列へ変換
         fo = CStr(targetDate(i))
         
         fo = format(fo, "yyyymmdd")
-     
+        
         'ファイルパスを作る
         FilePath = csvFolder & fo & "_kintai.csv"
         
         'True:関数を呼び出す　False:セルを空白にする
         If Dir(FilePath) = "" Then
-         
-                'セルを空にする
             
-            Else
+            'side = Cells(Rows.Count, 1).End(xlUp).Row + 1
+            Cells(a, "E").Value = ""
+            'Cells(7 + i, "D").Value = ""
+            'Cells(7 + i, "F").Value = ""
+            'Cells(7 + i, "H").Value = ""
+            ' Range(side).Columns("D:H") = "a"
             
-              '戻り値を受け取る
-              list = getData(FilePath)
-                
-              Call insertData(list)
-
-
+        Else
+        
+            '戻り値を受け取る
+            list = getData(FilePath)
+            
+            Call insertData(list, a)
+            
+        
         End If
-                  
-     Next
+    
+    Next
   
 End Sub
 
